@@ -2,9 +2,9 @@ let id = parseInt(localStorage.id)
 
 $(function() {
     console.log("hi"); 
-    $('#beautySubmitPost').click(handleSubmit);
-    $('#beautyCancelPost').click(resetPostBox);
-    renderBeauty(); 
+    $('#fashionSubmitPost').click(handleSubmit);
+    $('#fashionCancelPost').click(resetPostBox);
+    renderFashion(); 
     //deleteTest(); 
 });
 
@@ -12,7 +12,7 @@ const handleSubmit = async function(event) {
     event.preventDefault();
     if ($.trim($(`#postContent`).val()) == "" || $.trim($(`#postTitle`).val()) == "") {
         if (!document.getElementById("fillAllFieldsWarning")) {
-        $(`#beautyPostForm`).append(`<p id = "fillAllFieldsWarning" style = "color: red"> **Must fill out all fields!** </p>`); 
+        $(`#fashionPostForm`).append(`<p id = "fillAllFieldsWarning" style = "color: red"> **Must fill out all fields!** </p>`); 
         }
     } else {
     let jwt = localStorage.getItem('jwt');
@@ -35,7 +35,7 @@ const handleSubmit = async function(event) {
     dateString = monthNames[date.getMonth()] + " " + date.getDate().toString() + ", " + date.getFullYear().toString(); 
     time = date.toLocaleTimeString('en-US'); 
    
-    let result = axios.post('http://localhost:3000/private/beauty/' + id, {
+    let result = axios.post('http://localhost:3000/private/fashion/' + id, {
         data: {
             id: id,
             author: username,
@@ -55,18 +55,18 @@ const handleSubmit = async function(event) {
     localStorage.setItem('id', id);
 
     resetPostBox(); 
-    renderBeauty(); 
+    renderFashion(); 
     }
 }
 
 function resetPostBox() {
-    $(`#beautyPostForm`).replaceWith(`<div class="form-group" id = "beautyPostForm">
+    $(`#fashionPostForm`).replaceWith(`<div class="form-group" id = "fashionPostForm">
     <textarea class="form-control" id = "postTitle" rows="1" placeholder = "Post title"></textarea>
-    <textarea class="form-control" id = "postContent" rows="3" placeholder = "Post content"></textarea>
+    <textarea class="form-control" id = "postContent" rows="3" placeholder = "Post content"></textarea>
   </div>`)
 }
 
-async function renderBeauty() {
+async function renderFashion() {
     let jwt = localStorage.getItem('jwt'); 
     let status = await axios({
         method: "get",
@@ -78,13 +78,13 @@ async function renderBeauty() {
     let username = status.data.user.name; 
     const result = await axios({
         method: 'get',
-        url: 'http://localhost:3000/private/beauty',
+        url: 'http://localhost:3000/private/fashion',
         headers: {
             Authorization: "Bearer " + jwt
         },
       });
     objectArray = Object.values(result.data.result)
-    let posts = `<div id = "beautypostcontainer">`;
+    let posts = `<div id = "fashionpostcontainer">`;
     for (let i = objectArray.length - 1; i >=0 ; i--) {
         let post = objectArray[i]; 
         posts += `<div class="card mb-4" class = "postIndiv" id = "${post.id}">
@@ -105,7 +105,7 @@ async function renderBeauty() {
         posts += `</div> </div>`; 
     }
     posts += `</div>`;
-    $('#beautypostcontainer').replaceWith(posts);
+    $('#fashionpostcontainer').replaceWith(posts);
     $('.deleteButton').click(handleDelete);
     $('.editButton').click(handleEdit);
 
@@ -117,13 +117,13 @@ const handleDelete = async function(event) {
     let id = $(event.target).parent().parent()[0].id; 
     const result = await axios({
         method: 'delete',
-        url: 'http://localhost:3000/private/beauty/' + id,
+        url: 'http://localhost:3000/private/fashion/' + id,
         headers: {
             Authorization: "Bearer " + jwt
         },
       });
       console.log(result); 
-      renderBeauty(); 
+      renderFashion(); 
 }
 
 const handleEdit = async function(event) {
@@ -131,7 +131,7 @@ const handleEdit = async function(event) {
     let id = $(event.target).parent().parent()[0].id; 
     const result = await axios({
         method: 'get',
-        url: 'http://localhost:3000/private/beauty/' + id,
+        url: 'http://localhost:3000/private/fashion/' + id,
         headers: {
             Authorization: "Bearer " + jwt
         },
@@ -139,7 +139,7 @@ const handleEdit = async function(event) {
 
     $(event.target).parent().prev().replaceWith(`<div class="form-group" id = "editPostForm">
     <textarea class="form-control" id = "editPostTitle" rows="1"> ${result.data.result.title} </textarea>
-    <textarea class="form-control" id = "editPostContent" rows="3"> ${result.data.result.body}</textarea>
+    <textarea class="form-control" id = "editPostContent" rows="3"> ${result.data.result.body}</textarea>
     </div>`)
     $(event.target).replaceWith(`<button type="button" class = "updateButton" >Update</button>
     <button type="button" class = "cancelButton" >Cancel</button>`)
@@ -149,7 +149,7 @@ const handleEdit = async function(event) {
 }
 
 const handleCancel = async function(event) {
-    renderBeauty(); 
+    renderFashion(); 
 }
 
 const handleUpdate = async function(event) {
@@ -157,13 +157,13 @@ const handleUpdate = async function(event) {
     let id = $(event.target).parent().parent()[0].id;
     const result = await axios({
         method: 'get',
-        url: 'http://localhost:3000/private/beauty/' + id,
+        url: 'http://localhost:3000/private/fashion/' + id,
         headers: {
             Authorization: "Bearer " + jwt
         },
     }); 
     console.log(result)
-    let result2 = axios.post('http://localhost:3000/private/beauty/' + id, {
+    let result2 = axios.post('http://localhost:3000/private/fashion/' + id, {
         data: {
             title: $(`#editPostTitle`).val(),
             body: $(`#editPostContent`).val(),
@@ -172,17 +172,18 @@ const handleUpdate = async function(event) {
             id: result.data.result.id
         }}, 
         {headers: {Authorization: "Bearer " + jwt}},);
-    renderBeauty();
+    renderFashion();
 }
 
 async function deleteTest() {
     let jwt = localStorage.getItem('jwt'); 
     const result = await axios({
         method: 'delete',
-        url: 'http://localhost:3000/private/beauty',
+        url: 'http://localhost:3000/private/fashion',
         headers: {
             Authorization: "Bearer " + jwt
         },
       });
     console.log(result); 
 }
+

@@ -1,31 +1,134 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>PDG Final Project</title>
-    <meta name="author" content="PDG Group">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script src="blog.js"></script>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Health Blog</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="css/agency.min.css" rel="stylesheet">
+  <link href="css/blog-post.css" rel="stylesheet">
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  
+  <script src="health.js"></script>
+
+  <!-- Custom styles for this template 
+  <link href="css/blog-home.css" rel="stylesheet">
+-->
 </head>
 
-<body>
-    <div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="beauty.html">Beauty</a></li>
-            <li><a href="skincare.html">Skincare</a></li>
-            <li><a href="health.html">Health</a></li>
-            <li><a href="fitness.html">Fitness</a></li>
-            <li><a href="fashion.html">Fashion</a></li>
-            <li style = "float:right"><a href="signUp.html">Sign Up</a></li>
-            <li style = "float:right"><a href="login.html">Log In</a></li>
-          </ul>
+<body id="page-top" style = "background: #25251D">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="loggedin.html">Pretty Dainty Girls</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="loggedin.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="fitness.html">Fitness</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="skincare.html">Skincare</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="beauty.html">Beauty</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="health.html">Health</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="fashion.html">Fashion</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="userPage.html">Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="login.html">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  
-  
-  </body>
-  </html>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-lead-in">Welcome To Our Blog!</div>
+        <div class="intro-heading text-uppercase">Our mission is to help you become the best person you can be!</div>
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+      </div>
+    </div>
+  </header>
+    
+</head>
+
+<div class="container">
+<div class="row">
+<!-- Blog Posts -->
+<div class="col-md-8">
+<div class="card my-4">
+  <h2 class="card-header">Make a Health Post!</h2>
+  <div class="card-body">
+    <form>
+    <div class="form-group" id = "healthPostForm">
+      <textarea class="form-control" id = "postTitle" rows="1" placeholder = "Post title"></textarea>
+      <textarea class="form-control" id = "postContent" rows="3" placeholder = "Post content"></textarea>
+    </div>
+    <button type="button" id= "healthSubmitPost" class="btn btn-primary">Submit</button>
+    <button type="button" id= "healthCancelPost" class="btn btn-primary">Cancel</button>
+  </form>
+  </div>
+  <div id = "healthpostcontainer"> 
+
+  </div>
+</div>
+</div>
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4">
+
+    <!-- Search Widget -->
+    <div class="card my-4">
+      <h5 class="card-header">Wanna learn more about something you read? Search here!</h5>
+      <div class="card-body">
+        <div class="input-group">
+            <script async src="https://cse.google.com/cse.js?cx=000888210889775888983:pqb3ch1ewhg"></script>
+            <div class="gcse-searchbox-only" data-resultsUrl="https://google.com/search?">
+          </span>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+
+</html>

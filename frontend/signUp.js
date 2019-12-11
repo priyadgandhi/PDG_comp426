@@ -5,42 +5,29 @@ $(function() {
 
 const handleCreateAccount = async function(event) {
     console.log("hello")
-    //go back to index.html with proper permissions or throw error/alert message
-
-    event.preventDefault();
-
-    console.log($(`#passwordval`).val())
-    /*
-    await axios({
-        method: "post",
-        url: "http://localhost:3000/account/create",
-        //withCredentials: false,
-        data: {
-            first: $(`#fname`).val(),
-            last: $(`#lname`).val(),
-            username: $(`#uname`).val(),
-            password: $(`#pswrd`).val(),
-            account_type: "user"
+    if ($.trim($(`#usernameval`).val()) == "" || $.trim($(`#nameval`).val()) == "" || $.trim($(`#schoolval`).val()) == "" || $.trim($(`#majorval`).val()) == "" || $.trim($(`#passwordval`).val()) == "") {
+        if (!document.getElementById("fillAllFieldsWarning")) {
+        $(`#inputFields`).append(`<h5 id = "fillAllFieldsWarning" style = "color: red"> **Must fill out all fields!** </h5>`); 
         }
-    });
-*/
-    let r = axios.post('http://localhost:3000/account/create', {
-        name: "" + $(`#usernameval`).val() + "",
-        pass: "" + $(`#passwordval`).val() + "",
-        data: {
-            name: "" + $(`#nameval`).val() + "",
-            account_type: "user"
-        }
-    });
+    } else {
+        event.preventDefault();
+        let response = axios.post('http://localhost:3000/account/create', {
+            name: "" + $(`#usernameval`).val() + "",
+            pass: "" + $(`#passwordval`).val() + "",
+            data: {
+                fullname: "" + $(`#nameval`).val() + "",
+                school: "" + $(`#schoolval`).val() + "",
+                major: "" + $(`#majorval`).val() + "",
+                account_type: "user"
+            }
+        });
 
-    r.then(response => {
-        console.log(response.data);
-    }).catch(error => {
-        console.log(error);
-    });
+        response.then(response => {
+            console.log(response.data);
+        }).catch(error => {
+            console.log(error);
+        });
 
-    //window.location.href = "http://localhost:3001/login.html"
-
-    //window.location = "index.html"
-
+        window.location.href = "http://localhost:3001/login.html"
+    }
 }

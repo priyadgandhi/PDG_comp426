@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Beauty Blog</title>
+  <title>User Page</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,10 +22,13 @@
 
   <!-- Custom styles for this template -->
   <link href="css/agency.min.css" rel="stylesheet">
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <script src="userPage.js"></script>
 
 </head>
 
-<body id="page-top">
+<body id="page-top" style = "background:black">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -72,13 +75,14 @@
       <div class="intro-text">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="profilePage">
-          <h1>Thank you for using our collaborative blog ____Name___!</h1>
-          <p class="title">Follow our social media.</p>
-          <p>Send me a message if you have any questions.</p>
+          <div id = "customizedGreeting"></div>
+          <h2 style = "color: rgb(238, 212, 67)" class="title">Follow our social media.</h2> </br> 
+          <h3 style = "color: rgb(238, 212, 67)" >Send me a message if you have any questions.</h3> </br> </br>
           <a href="https://twitter.com/kmayerpatel"><i class="fa fa-twitter"></i></a>
           <a href="https://www.linkedin.com/in/ketan-mayer-patel-b104b2/"><i class="fa fa-linkedin"></i></a>
           <a href="https://www.facebook.com/ketan.mayerpatel"><i class="fa fa-facebook"></i></a>
-          <p><button onclick="window.location.href = 'https://www.linkedin.com/in/priyagandhi-/';">Contact</button></p>
+        </br> </br> 
+          <p><button onclick="window.location.href = 'https://www.linkedin.com/in/priyagandhi-/';" class="btn btn-primary" class="button is-link" style = "color: black">Contact</button></p>
         </div>
       </div>
     </div>
